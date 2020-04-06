@@ -20,18 +20,20 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text("Mony managment"),
         ),
-        body: Container(
-          width: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Card(elevation: 8, child: Text("adas")),
-              Container(
-                margin: EdgeInsets.all(10),
-                 child: UserTransaction(),
-              ),
-            ],
+        body: SingleChildScrollView(
+          child: Container(
+            width: double.infinity,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Card(elevation: 8, child: Text("adas")),
+                Container(
+                  margin: EdgeInsets.all(10),
+                   child: UserTransaction(),
+                ),
+              ],
+            ),
           ),
         ),
       ),
