@@ -19,6 +19,12 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: Text("Mony managment"),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {},
+            )
+          ],
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -30,11 +36,19 @@ class MyApp extends StatelessWidget {
                 Card(elevation: 8, child: Text("adas")),
                 Container(
                   margin: EdgeInsets.all(10),
-                   child: UserTransaction(),
+                  child: UserTransaction(),
                 ),
               ],
             ),
           ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: FloatingActionButton(
+          child: IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {},
+          ),
+          onPressed: () {},
         ),
       ),
     );

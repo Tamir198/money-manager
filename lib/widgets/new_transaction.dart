@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 class NewTransaction extends StatelessWidget {
   final Function addTransaction;
 
-  final TextEditingController amountController = TextEditingController();
   final TextEditingController titleController = TextEditingController();
+  final TextEditingController amountController = TextEditingController();
+
 
   NewTransaction(this.addTransaction);
 
