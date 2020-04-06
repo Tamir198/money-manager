@@ -38,7 +38,7 @@ class TransactionList extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "${transaction[index].amount}\$",
+                          "${transaction[index].amount.toStringAsFixed(2)}\$",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
