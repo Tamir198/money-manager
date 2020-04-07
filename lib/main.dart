@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:moneymanager/widgets/chart.dart';
 import './models/transaction.dart';
 import './widgets/new_transaction.dart';
 import './widgets/transaction_list.dart';
 
 void main() => runApp(MaterialApp(
-  title: "Money manager",
-    theme: ThemeData(
-      primarySwatch: Colors.cyan,
-      accentColor: Colors.greenAccent
-    ),
+    title: "Money manager",
+    theme:
+        ThemeData(primarySwatch: Colors.cyan, accentColor: Colors.greenAccent),
     home: MyApp()));
 
 class MyApp extends StatefulWidget {
@@ -18,9 +17,17 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final List<Transaction> _transactionLIst = [
-   // Transaction(id: "my id", title: "title", amount: 20.0, date: DateTime.now()),
-   // Transaction(id: "my id", title: "title", amount: 20.0, date: DateTime.now())
+    // Transaction(id: "my id", title: "title", amount: 20.0, date: DateTime.now()),
+    // Transaction(id: "my id", title: "title", amount: 20.0, date: DateTime.now())
   ];
+
+  List<Transaction> get _recentTransactions {
+    return _transactionLIst.where((transaction) {
+      //only transaction that are maximum week old returned here
+      return transaction.date.isAfter(DateTime.now().subtract(Duration(days: 7)
+      ));
+    }).toList();
+  }
 
   void _addNewTransaction(String title, double amount) {
     Transaction newTransaction = Transaction(
@@ -40,8 +47,8 @@ class _MyAppState extends State<MyApp> {
         //(_) this is context that i am getting but not using
         builder: (_) {
           return GestureDetector(
-            onTap: (){},
-            child:  NewTransaction(_addNewTransaction),
+            onTap: () {},
+            child: NewTransaction(_addNewTransaction),
           );
         });
   }
@@ -71,7 +78,7 @@ class _MyAppState extends State<MyApp> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Card(elevation: 8, child: Text("adas")),
+                Chart(recentTransactions: _recentTransactions,),
                 Container(
                   margin: EdgeInsets.all(10),
                   child: TransactionList(_transactionLIst),
