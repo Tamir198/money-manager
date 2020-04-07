@@ -1,24 +1,31 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class NewTransaction extends StatelessWidget {
+class NewTransaction extends StatefulWidget {
   final Function addTransaction;
-
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController amountController = TextEditingController();
 
 
   NewTransaction(this.addTransaction);
 
-  void submitListItem(){
+  @override
+  _NewTransactionState createState() => _NewTransactionState();
+}
 
+class _NewTransactionState extends State<NewTransaction> {
+
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController amountController = TextEditingController();
+
+  void submitListItem(){
     final String enteredTitle = titleController.text;
     final double enteredAmount =  double.parse(amountController.text);
     //some input is empty - stop function here
     if(enteredTitle.isEmpty || enteredAmount <= 0 ){
       return;
     }
-    addTransaction(enteredTitle,enteredAmount);
+    widget.addTransaction(enteredTitle,enteredAmount);
+    //close bottom sheet after adding new transaction
+    Navigator.of(context).pop();
   }
 
   @override
@@ -42,7 +49,7 @@ class NewTransaction extends StatelessWidget {
           FlatButton(
             onPressed:submitListItem,
             child: Text("Add transaction"),
-            textColor: Colors.cyan,
+            textColor: Theme.of(context).primaryColor,
           )
         ],
       ),
