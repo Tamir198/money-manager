@@ -18,9 +18,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final List<Transaction> _transactionLIst = [
-    Transaction(
-        id: "my id", title: "title", amount: 20.0, date: DateTime.now()),
-    Transaction(id: "my id", title: "title", amount: 20.0, date: DateTime.now())
+   // Transaction(id: "my id", title: "title", amount: 20.0, date: DateTime.now()),
+   // Transaction(id: "my id", title: "title", amount: 20.0, date: DateTime.now())
   ];
 
   void _addNewTransaction(String title, double amount) {
@@ -53,7 +52,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Flutter Demooo',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Flutter App'),
+          title: Text('Money manager'),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.add),
