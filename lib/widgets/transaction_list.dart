@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:moneymanager/models/transaction.dart';
+import 'package:moneymanager/widgets/no_content.dart';
 
 //This is Stateless because the state of the wid
 class TransactionList extends StatelessWidget {
@@ -16,17 +17,10 @@ class TransactionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 300,
-      child: isEmpty()? Column(children: <Widget>[
-        Text("No transactions added"),
-        SizedBox(height: 18,),
-        Container(
-          height: 200,
-            child: Image.asset("images/no_content.png",fit: BoxFit.fitWidth,)),
-      ],) : ListView.builder(
+      child: isEmpty()? NoContent() : ListView.builder(
             itemBuilder: (context,index) {
               return Card(
                 child: Row(
-
                   children: <Widget>[
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 6, vertical: 10),
