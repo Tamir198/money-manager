@@ -6,8 +6,10 @@ import './widgets/transaction_list.dart';
 
 void main() => runApp(MaterialApp(
     title: "Money manager",
-    theme:
-        ThemeData(primarySwatch: Colors.cyan, accentColor: Colors.greenAccent),
+    theme: ThemeData(
+    buttonTheme: ButtonThemeData(buttonColor: Colors.deepPurple,)
+      //textTheme: Colors.purple, accentColor: Colors.amber,
+    ),
     home: MyApp()));
 
 class MyApp extends StatefulWidget {
@@ -29,12 +31,13 @@ class _MyAppState extends State<MyApp> {
     }).toList();
   }
 
-  void _addNewTransaction(String title, double amount) {
+  void _addNewTransaction(String title, double amount,DateTime chosenDate) {
     Transaction newTransaction = Transaction(
         title: title,
         amount: amount,
-        date: DateTime.now(),
-        id: DateTime.now().toString());
+        date: chosenDate,
+        id: DateTime.now().toString()
+        );
 
     setState(() {
       _transactionLIst.add(newTransaction);
