@@ -5,11 +5,11 @@ import 'package:moneymanager/widgets/no_content.dart';
 
 //This is Stateless because the state of the wid
 class TransactionList extends StatelessWidget {
-  final List <Transaction> transaction;
+  final List<Transaction> transaction;
 
   TransactionList(this.transaction);
 
-  bool isEmpty(){
+  bool isEmpty() {
     return transaction.isEmpty;
   }
 
@@ -17,9 +17,33 @@ class TransactionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 300,
-      child: isEmpty()? NoContent() : ListView.builder(
-            itemBuilder: (context,index) {
-              return Card(
+      child: isEmpty() ? NoContent() : ListView.builder(
+              itemBuilder: (context, index) {
+                return Card(
+                  elevation: 5,
+                  margin: EdgeInsets.symmetric(vertical: 8,horizontal: 5),
+                  child: ListTile(leading: CircleAvatar(
+                    radius: 30,
+                    child: Padding(
+                        padding: EdgeInsets.all(6),
+                        child: FittedBox(child: Text("\$${transaction[index].amount}"))
+                    ),
+                  ),
+                    title: Text(transaction[index].title,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 16, color: Theme.of(context).accentColor
+                    ),
+                  ),
+                    subtitle: Text(
+                      DateFormat("dd/MM/yyyy").format(transaction[index].date),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Theme.of(context).accentColor),
+                    ),
+                  ),
+                );
+                /*Card(
                 child: Row(
                   children: <Widget>[
                     Container(
@@ -59,12 +83,11 @@ class TransactionList extends StatelessWidget {
                     ),
                   ],
                 ),
-              );
-              //return Card(child: Text(transaction.title + transaction.id + (transaction.amount).toString()));
-            },
-        itemCount: transaction.length,
-          ),
+              );*/
+                //return Card(child: Text(transaction.title + transaction.id + (transaction.amount).toString()));
+              },
+              itemCount: transaction.length,
+            ),
     );
-
   }
 }

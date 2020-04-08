@@ -21,10 +21,11 @@ class Chart extends StatelessWidget {
           totalSum += recentTransactions[i].amount;
         }
       }
-
       //return map to the generate method
-      return {'day': DateFormat.E().format(weekDay).substring(0,1), 'amount': totalSum};
-    });
+      return
+        {'day': DateFormat.E().format(weekDay).substring(0,1),
+        'amount': totalSum};
+    }).reversed.toList();
   }
 
   //in flutter you can change list to int or double for example
@@ -39,12 +40,19 @@ class Chart extends StatelessWidget {
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(20),
-      child: Row(
-        children: allTransactions.map((data){
-          return  ChartBar(data['day'],
-              data['amount'],
-              getTotalWeekSpending == 0.0 ? 0.0 :(data['amount'] as double) /getTotalWeekSpending);
-        }).toList(),
+      child: Padding(
+        padding: EdgeInsets.all((10)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: allTransactions.map((data){
+            return  Flexible(
+              fit: FlexFit.tight,
+              child: ChartBar(data['day'],
+                  data['amount'],
+                  getTotalWeekSpending == 0.0 ? 0.0 :(data['amount'] as double) /getTotalWeekSpending),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
