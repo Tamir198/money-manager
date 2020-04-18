@@ -6,8 +6,9 @@ import 'package:moneymanager/widgets/no_content.dart';
 //This is Stateless because the state of the wid
 class TransactionList extends StatelessWidget {
   final List<Transaction> transaction;
+  final Function deleteTransaction;
 
-  TransactionList(this.transaction);
+  TransactionList(this.transaction, this.deleteTransaction);
 
   bool isEmpty() {
     return transaction.isEmpty;
@@ -41,6 +42,9 @@ class TransactionList extends StatelessWidget {
                           fontSize: 16,
                           color: Theme.of(context).accentColor),
                     ),
+                    trailing: IconButton(icon: Icon(Icons.delete), color: Theme.of(context).errorColor,
+                        onPressed:() => deleteTransaction(transaction[index].id),
+                        ),
                   ),
                 );
                 /*Card(

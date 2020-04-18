@@ -19,6 +19,8 @@ class Chart extends StatelessWidget {
             recentTransactions[i].date.month == weekDay.month &&
             recentTransactions[i].date.year == weekDay.year) {
           totalSum += recentTransactions[i].amount;
+          //todo check why this is being received 15 times and not 1
+          print("total sum is " + totalSum.toString());
         }
       }
 
@@ -30,6 +32,7 @@ class Chart extends StatelessWidget {
 
   //in flutter you can change list to int or double for example
   double get getTotalWeekSpending{
+    //0.0 starting value
     return allTransactions.fold(0.0,(sum,item) {
       return sum + item['amount'];
     });
@@ -49,7 +52,8 @@ class Chart extends StatelessWidget {
               fit: FlexFit.tight,
               child: ChartBar(data['day'],
                   data['amount'],
-                  getTotalWeekSpending == 0.0 ? 0.0 :(data['amount'] as double) /getTotalWeekSpending),
+                  getTotalWeekSpending == 0.0 ? 0.0 :(data['amount'] as double) /getTotalWeekSpending
+              ),
             );
           }).toList(),
         ),
