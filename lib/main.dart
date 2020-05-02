@@ -7,9 +7,11 @@ import './widgets/transaction_list.dart';
 void main() => runApp(MaterialApp(
     title: "Money manager",
     theme: ThemeData(
-    buttonTheme: ButtonThemeData(buttonColor: Colors.deepPurple,)
-      //textTheme: Colors.purple, accentColor: Colors.amber,
-    ),
+        buttonTheme: ButtonThemeData(
+      buttonColor: Colors.deepPurple,
+    )
+        //textTheme: Colors.purple, accentColor: Colors.amber,
+        ),
     home: MyApp()));
 
 class MyApp extends StatefulWidget {
@@ -26,28 +28,26 @@ class _MyAppState extends State<MyApp> {
   List<Transaction> get _recentTransactions {
     return _transactionLIst.where((transaction) {
       //only transaction that are maximum week old returned here
-      return transaction.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+      return transaction.date
+          .isAfter(DateTime.now().subtract(Duration(days: 7)));
     }).toList();
   }
 
-
-  void _addNewTransaction(String title, double amount,DateTime chosenDate) {
+  void _addNewTransaction(String title, double amount, DateTime chosenDate) {
     Transaction newTransaction = Transaction(
         title: title,
         amount: amount,
         date: chosenDate,
-        id: DateTime.now().toString()
-        );
+        id: DateTime.now().toString());
     setState(() {
       _transactionLIst.add(newTransaction);
     });
   }
 
-  void _deleteTransaction(String id){
+  void _deleteTransaction(String id) {
     setState(() {
       _transactionLIst.retainWhere((transaction) => transaction.id == id);
     });
-
   }
 
   void startAddingNewTransaction(BuildContext buildContext) {
@@ -87,10 +87,12 @@ class _MyAppState extends State<MyApp> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Chart(recentTransactions: _recentTransactions,),
+                Chart(
+                  recentTransactions: _recentTransactions,
+                ),
                 Container(
                   margin: EdgeInsets.all(10),
-                  child: TransactionList(_transactionLIst,_deleteTransaction),
+                  child: TransactionList(_transactionLIst, _deleteTransaction),
                 ),
               ],
             ),
