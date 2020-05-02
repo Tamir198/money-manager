@@ -5,6 +5,7 @@ import './widgets/new_transaction.dart';
 import './widgets/transaction_list.dart';
 
 void main() => runApp(MaterialApp(
+
     title: "Money manager",
     theme: ThemeData(
         buttonTheme: ButtonThemeData(
@@ -20,6 +21,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  bool shouldShowChart = false;
   final List<Transaction> _transactionLIst = [
     // Transaction(id: "my id", title: "title", amount: 20.0, date: DateTime.now()),
     // Transaction(id: "my id", title: "title", amount: 20.0, date: DateTime.now())
@@ -64,6 +66,10 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isLandscape  = MediaQuery.of(context).orientation == Orientation.landscape;
+    final transactionListWidget =  Container(
+      margin: EdgeInsets.all(10), child: TransactionList(_transactionLIst, _deleteTransaction),
+    );
     return MaterialApp(
       title: 'Flutter Demooo',
       home: Scaffold(
@@ -87,13 +93,27 @@ class _MyAppState extends State<MyApp> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Chart(
+               if(isLandscape) Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text("Show charts"),
+                    Switch(
+                      value: shouldShowChart, onChanged: (value) {
+                        setState(() {
+                          shouldShowChart = value;
+                        });
+                    },),
+                  ],
+                ),
+                if(!isLandscape) Chart(
                   recentTransactions: _recentTransactions,
                 ),
-                Container(
-                  margin: EdgeInsets.all(10),
-                  child: TransactionList(_transactionLIst, _deleteTransaction),
-                ),
+                if(!isLandscape) transactionListWidget,
+
+                if(isLandscape)
+                  shouldShowChart ? Chart(
+                  recentTransactions: _recentTransactions,
+                ): transactionListWidget,
               ],
             ),
           ),
