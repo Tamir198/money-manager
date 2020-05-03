@@ -16,25 +16,31 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
     return Container(
-      height: MediaQuery.of(context).size.height * 0.6,
-      child: isEmpty() ? NoContent() : ListView.builder(
+      height: mediaQuery.size.height * 0.6,
+      child: isEmpty()
+          ? NoContent()
+          : ListView.builder(
               itemBuilder: (context, index) {
                 return Card(
                   elevation: 5,
-                  margin: EdgeInsets.symmetric(vertical: 8,horizontal: 5),
-                  child: ListTile(leading: CircleAvatar(
-                    radius: 30,
-                    child: Padding(
-                        padding: EdgeInsets.all(6),
-                        child: FittedBox(child: Text("\$${transaction[index].amount}"))
+                  margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      radius: 30,
+                      child: Padding(
+                          padding: EdgeInsets.all(6),
+                          child: FittedBox(
+                              child: Text("\$${transaction[index].amount}"))),
                     ),
-                  ),
-                    title: Text(transaction[index].title,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 16, color: Theme.of(context).accentColor
+                    title: Text(
+                      transaction[index].title,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Theme.of(context).accentColor),
                     ),
-                  ),
                     subtitle: Text(
                       DateFormat("dd/MM/yyyy").format(transaction[index].date),
                       style: TextStyle(
@@ -42,9 +48,18 @@ class TransactionList extends StatelessWidget {
                           fontSize: 16,
                           color: Theme.of(context).accentColor),
                     ),
-                    trailing: IconButton(icon: Icon(Icons.delete), color: Theme.of(context).errorColor,
-                        onPressed:() => deleteTransaction(transaction[index].id),
-                        ),
+                    trailing: mediaQuery.size.width > 400
+                        ? FlatButton.icon(
+                            label: Text("Delete"),
+                            icon: Icon(Icons.delete),
+                            textColor: Theme.of(context).errorColor,
+                            onPressed: () => deleteTransaction(transaction[index].id))
+                        : IconButton(
+                            icon: Icon(Icons.delete),
+                            color: Theme.of(context).errorColor,
+                            onPressed: () =>
+                                deleteTransaction(transaction[index].id),
+                          ),
                   ),
                 );
                 /*Card(

@@ -66,7 +66,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isLandscape  = MediaQuery.of(context).orientation == Orientation.landscape;
+    final mediaQuery  = MediaQuery.of(context);
+    final bool isLandscape  = mediaQuery.orientation == Orientation.landscape;
     final transactionListWidget =  Container(
       margin: EdgeInsets.all(10), child: TransactionList(_transactionLIst, _deleteTransaction),
     );
