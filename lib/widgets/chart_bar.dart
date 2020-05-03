@@ -9,42 +9,45 @@ class ChartBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Container(
-          height: 20,
-            child: FittedBox(
-                child: Text('\$${amountSpent.toStringAsFixed((0))}')
-            )
-        ),
-        SizedBox(height: 5),
-        Container(
-          height: 60,
-          width: 10,
-          child: Stack(
-            children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey, width: 1.0),
-                  color: Color.fromARGB(183, 92, 186, 1),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              FractionallySizedBox(
-                heightFactor: percentSpentOfTotal,
-                child: Container(
+    return LayoutBuilder(builder: (context,constraints){
+      return Column(
+        children: <Widget>[
+          Container(
+              height: MediaQuery.of(context).size.height * 0.03,
+              child: FittedBox(
+                  child: Text('\$${amountSpent.toStringAsFixed((0))}')
+              )
+          ),
+          SizedBox(height: 5),
+          Container(
+            height: 60,
+            width: 10,
+            child: Stack(
+              children: <Widget>[
+                Container(
                   decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
+                    border: Border.all(color: Colors.grey, width: 1.0),
+                    color: Color.fromARGB(183, 92, 186, 1),
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-              )
-            ],
+                FractionallySizedBox(
+                  heightFactor: percentSpentOfTotal,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-        SizedBox(height: 5),
-        Text(dayOfWeek)
-      ],
-    );
+          SizedBox(height: 5),
+          Text(dayOfWeek)
+        ],
+      );
+    });
+
   }
 }

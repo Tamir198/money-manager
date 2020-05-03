@@ -43,42 +43,51 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Column(
-        children: <Widget>[
-          TextField(
-            decoration: InputDecoration(labelText: "Title"),
-            controller: _titleController,
-            onSubmitted: (_) => _submitListItem(),
-          ),
-          TextField(
-            //keyboardType: TextInputType.number is shorter but will not 100% work on ios
-            keyboardType: TextInputType.numberWithOptions(decimal: true),
-            decoration: InputDecoration(labelText: "amount"),
-            controller: _amountController,
-            //"(_)" Is here because I must accept argument (flutter works that way) but i don`t use it
-            onSubmitted: (_) => _submitListItem(),
-          ),
-          Container(
-            height: 70,
-            child: Row(children: <Widget>[
-              
-              Expanded(child: Text(_selectedDate == null ? 'No date chosen!' : "Picked date  " + DateFormat.yMd().format(_selectedDate))),
-              FlatButton(
-                onPressed: _popDatePicker,
-                textColor: Theme.of(context).primaryColor,
-                  child: Text('Choose date',style: TextStyle(fontWeight: FontWeight.bold,),
-                  ),
-              )
-            ],),
-          ),
-          RaisedButton(
-            onPressed:_submitListItem,
-            child: Text("Add transaction"),
-            color: Theme.of(context).primaryColor,
-            textColor: Colors.white,
-          )
-        ],
+    return SingleChildScrollView(
+      child: Card(
+        child: Column(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.only(
+                  left:10,
+                  right:10,
+                  top:10,
+                  bottom: MediaQuery.of(context).viewInsets.bottom + 10),
+              child: TextField(
+                decoration: InputDecoration(labelText: "Title"),
+                controller: _titleController,
+                onSubmitted: (_) => _submitListItem(),
+              ),
+            ),
+            TextField(
+              //keyboardType: TextInputType.number is shorter but will not 100% work on ios
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              decoration: InputDecoration(labelText: "amount"),
+              controller: _amountController,
+              //"(_)" Is here because I must accept argument (flutter works that way) but i don`t use it
+              onSubmitted: (_) => _submitListItem(),
+            ),
+            Container(
+              height: 70,
+              child: Row(children: <Widget>[
+                
+                Expanded(child: Text(_selectedDate == null ? 'No date chosen!' : "Picked date  " + DateFormat.yMd().format(_selectedDate))),
+                FlatButton(
+                  onPressed: _popDatePicker,
+                  textColor: Theme.of(context).primaryColor,
+                    child: Text('Choose date',style: TextStyle(fontWeight: FontWeight.bold,),
+                    ),
+                )
+              ],),
+            ),
+            RaisedButton(
+              onPressed:_submitListItem,
+              child: Text("Add transaction"),
+              color: Theme.of(context).primaryColor,
+              textColor: Colors.white,
+            )
+          ],
+        ),
       ),
     );
   }
