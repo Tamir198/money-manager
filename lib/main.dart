@@ -66,15 +66,18 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+
     final mediaQuery  = MediaQuery.of(context);
     final bool isLandscape  = mediaQuery.orientation == Orientation.landscape;
     final transactionListWidget =  Container(
       margin: EdgeInsets.all(10), child: TransactionList(_transactionLIst, _deleteTransaction),
     );
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demooo',
       home: Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           title: Text('Money manager'),
           actions: <Widget>[
             IconButton(
@@ -111,10 +114,7 @@ class _MyAppState extends State<MyApp> {
                 ),
                 if(!isLandscape) transactionListWidget,
 
-                if(isLandscape)
-                  shouldShowChart ? Chart(
-                  recentTransactions: _recentTransactions,
-                ): transactionListWidget,
+                if(isLandscape) shouldShowChart ? Chart(recentTransactions: _recentTransactions,): transactionListWidget,
               ],
             ),
           ),
