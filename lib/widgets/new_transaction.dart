@@ -52,7 +52,7 @@ class _NewTransactionState extends State<NewTransaction> {
                   left:10,
                   right:10,
                   top:10,
-                  bottom: MediaQuery.of(context).viewInsets.bottom + 10),
+                  bottom: 10),
               child: TextField(
                 decoration: InputDecoration(labelText: "Title"),
                 controller: _titleController,
